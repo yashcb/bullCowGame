@@ -29,16 +29,26 @@ int main()
 		PlayGame();
 		bWannaPlay = AskToPlayAgain();
 	} while (bWannaPlay);
-	std :: cout << "THEN FUCK OFF!\n";
+	std :: cout << "Hope you Enjoyed !\n";
 
 	return 0; // exit the application
 }
 
-void PrintIntro() 
+void PrintIntro()
 {
 	// introducing the game
-	std :: cout << "\n\n Welcome to Bulls & Cows, a fun game." << std :: endl;
-	std::cout << "Can you guess " << BCGame.GetHiddenWordLength() << " letter isogram I'm thinking of?\n\n";
+	std::cout << "Welcome to Bulls & Cows, a fun game.\n";
+	std::cout << std::endl;
+	std::cout << "          }   {         ___ " << std::endl;
+	std::cout << "          (o o)        (o o) " << std::endl;
+	std::cout << "   /-------\\ /          \\ /-------\\ " << std::endl;
+	std::cout << "  / | BULL |O            O| COW  | \\ " << std::endl;
+	std::cout << " *  |-,--- |              |------|  * " << std::endl;
+	std::cout << "    ^      ^              ^      ^ " << std::endl;
+	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength();
+	std::cout << " letter isogram I'm thinking of?\n";
+	std::cout << std::endl;
+	return;
 }
 
 void PlayGame()
@@ -72,7 +82,8 @@ FText GetValidGuess()
 	do {
 			// getting geuss from user
 			int32 CurrentTry = BCGame.GetCurrentTry();
-			std::cout << "Try " << CurrentTry << ". Enter your geuss: ";
+			std::cout << "Try " << CurrentTry << " of " << BCGame.GetMaxTries();
+			std::cout << ". Enter your geuss: ";
 			getline(std::cin, Guess);
 
 			Status = BCGame.CheckGuessValidity(Guess);
@@ -80,22 +91,22 @@ FText GetValidGuess()
 				{
 					
 					case EGuessStatus::Wrong_Length:
-						std::cout << "Please enter " << BCGame.GetHiddenWordLength() << " letter(s) word!\n";
+						std::cout << "Please enter " << BCGame.GetHiddenWordLength() << " letter(s) word!\n\n";
 						break;
 
 					case EGuessStatus::Not_Isogram:
-						std::cout << "Please enter word without repeating letter(s).\n";
+						std::cout << "Please enter word without repeating letter(s).\n\n";
 						break;
 
 					case EGuessStatus::Not_Lowercase:
-						std::cout << "Please enter all lowercase letter(s).\n";
+						std::cout << "Please enter all lowercase letter(s).\n\n";
 						break;
 
 					default:
 						// assume no errors
 						break;
 				}
-				std::cout << std::endl;
+				// std::cout << std::endl;
 	} while (Status != EGuessStatus::OK); // keep looping until we get no errors
 			return Guess;
 }
@@ -114,5 +125,5 @@ void PrintGameSummary()
 		std::cout << "Congratulations! You Won this game.\n";
 
 	else
-		std::cout << "\n Sorry... Better luck next time!";
+		std::cout << "\n Sorry... Better luck next time :)";
 }
